@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
+import isEmpty from 'lodash/isEmpty'
 
 import { actions as sessionActions } from 'store/Session'
 
@@ -94,7 +95,7 @@ class Session extends React.Component {
                         </div>
                     </div>
                     <div className="tokens">
-                        {session.tokens.length &&
+                        {!isEmpty(session) &&
                             session.tokens.map((x, i) => (
                                 <div
                                     className="token align-items-center d-flex"
