@@ -94,24 +94,26 @@ class Session extends React.Component {
                         </div>
                     </div>
                     <div className="tokens">
-                        {session.tokens.map((x, i) => (
-                            <div
-                                className="token align-items-center d-flex"
-                                key={i}>
-                                <img
-                                    src={
-                                        process.env.REACT_APP_DOCUMENT_ROOT +
-                                        x.logo
-                                    }
-                                    className="img-fluid mr-2"
-                                    style={{
-                                        width: '40px',
-                                    }}
-                                    alt="token logo"
-                                />
-                                <p className="mb-0">{x.name}</p>
-                            </div>
-                        ))}
+                        {session.tokens.length &&
+                            session.tokens.map((x, i) => (
+                                <div
+                                    className="token align-items-center d-flex"
+                                    key={i}>
+                                    <img
+                                        src={
+                                            process.env
+                                                .REACT_APP_DOCUMENT_ROOT +
+                                            x.logo
+                                        }
+                                        className="img-fluid mr-2"
+                                        style={{
+                                            width: '40px',
+                                        }}
+                                        alt="token logo"
+                                    />
+                                    <p className="mb-0">{x.name}</p>
+                                </div>
+                            ))}
                     </div>
                 </div>
                 <TokenDb
