@@ -276,7 +276,7 @@ class TokenDb extends React.Component {
                                 </div>
                             )}
                         </div>
-                        {tokens.length && (
+                        {!!tokens.length && (
                             <div className="d-flex align-items-center justify-content-center mb-3">
                                 <Pagination
                                     activePage={selectedToken}
