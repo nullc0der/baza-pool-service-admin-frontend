@@ -1,0 +1,22 @@
+@import 'ui-framework/ui';
+
+.container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: $sidebar-width;
+    height: $topbar-height;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include media-breakpoint-down(lg) {
+        left: 0;
+    }
+    :global {
+        .sidebar-toggle {
+            padding: 15px 10px;
+        }
+    }
+}

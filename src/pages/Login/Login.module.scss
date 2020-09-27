@@ -1,0 +1,27 @@
+@import 'ui-framework/ui';
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    padding: 2rem 0;
+
+    :global {
+        .login-form-wrapper {
+            background-color: #fff;
+            @include _shadow_2();
+            padding: 2rem;
+            width: 350px;
+            min-height: 350px;
+            border-radius: 3px;
+            .logo-image {
+                width: 60px;
+            }
+            @include media-breakpoint-down(md) {
+                width: 280px;
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+@import 'ui-framework/ui';
+
+.container {
+    width: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $dark;
+    color: #fff;
+    transition: width 0.3s ease-in-out;
+    visibility: hidden;
+    :global {
+        .sidebar-content {
+            z-index: 1;
+        }
+        .header {
+            height: $topbar-height;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .logo-image {
+                width: 30px;
+            }
+            h5 {
+                margin-bottom: 0;
+                margin-left: 0.5rem;
+            }
+        }
+        .menu {
+            .menu-item {
+                display: block;
+                padding: 1rem;
+                color: #fff;
+                text-decoration: none;
+                &:hover {
+                    background-color: #495057;
+                }
+            }
+        }
+        .sidebar-backdrop {
+            background-color: rgba(0, 0, 0, 0.45);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+}
+
+:global {
+    :local(.container) {
+        &.is-open {
+            width: $sidebar-width;
+            visibility: visible;
+            z-index: 3;
+        }
+    }
+}

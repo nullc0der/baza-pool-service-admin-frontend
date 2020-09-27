@@ -1,0 +1,31 @@
+@import 'ui-framework/ui';
+@import 'bootstrap/scss/bootstrap';
+@import 'custom-bootstrap';
+
+body {
+    background-color: #fff;
+    color: $dark;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#root,
+.app-main {
+    display: block;
+    min-width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+}
+
+.app-main {
+    color: inherit;
+    position: relative;
+}
+
+.material-icons {
+    font-size: 20px;
+}
+
+.flex-1 {
+    flex: 1;
+}

@@ -1,0 +1,106 @@
+@import 'ui-framework/ui';
+
+$ui-textfield-input-height: 36px !default;
+
+.container {
+    color: inherit;
+    width: 100%;
+    position: relative;
+    :global {
+        .ui-textfield-label {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 0rem;
+            left: 0;
+            margin-bottom: map-get($spacers, 1);
+            transition: bottom 0.2s ease;
+            pointer-events: none;
+            .label-icon {
+                font-size: 16px;
+                display: inline-block;
+                margin-bottom: -3px;
+                & + .label-text {
+                    margin-left: map-get($spacers, 1);
+                }
+            }
+            .label-text {
+                font-size: 14px;
+                transform: scale(1);
+                transform-origin: center left;
+                transition: transform 0.2s ease;
+            }
+        }
+
+        .ui-textfield-validation-icon {
+            position: absolute;
+            top: map-get($spacers, 1);
+            right: 0;
+        }
+
+        .ui-textfield-input {
+            width: 100%;
+            border: none;
+            height: $ui-textfield-input-height;
+            background: none;
+            border-bottom: 1px $dark solid;
+            outline: none;
+            padding-bottom: 0;
+            &:focus,
+            &:active {
+                outline: none;
+            }
+            &:focus,
+            &.has-value {
+                & + .ui-textfield-label {
+                    bottom: map-get($spacers, 2) * 1.15;
+                    .label-text {
+                        transform: scale(0.9);
+                    }
+                }
+            }
+
+            &.in-center {
+                text-align: center;
+            }
+
+            &.first-char-upper {
+                text-transform: capitalize;
+            }
+        }
+
+        .ui-textfield-error {
+            font-size: 12px;
+            color: $danger;
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+        }
+    }
+}
+
+:global {
+    :local(.container) {
+        &.is-textbox {
+            background-color: $light;
+            padding: 12px 24px;
+            .ui-textfield-label {
+                left: 24px;
+                bottom: 10px;
+            }
+
+            .ui-textfield-input {
+                border-bottom: none;
+                @include placeholder() {
+                    opacity: 0.5;
+                }
+                &:focus,
+                &.has-value {
+                    & + .ui-textfield-label {
+                        bottom: 28px;
+                    }
+                }
+            }
+        }
+    }
+}

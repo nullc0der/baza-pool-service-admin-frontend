@@ -1,0 +1,37 @@
+@import 'ui-framework/ui';
+
+.container {
+    background-color: #fff;
+    @include _shadow_2();
+    min-height: 100%;
+    position: relative;
+    :global {
+        .tokendb-button {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $dark;
+            color: #fff;
+            cursor: pointer;
+        }
+        .session-details {
+            padding: 1rem;
+        }
+        .token {
+            border: 1px solid $dark;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+        }
+        .edit-button-wrapper {
+            .fas {
+                cursor: pointer;
+            }
+        }
+    }
+}

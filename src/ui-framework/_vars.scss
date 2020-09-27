@@ -1,0 +1,53 @@
+// Override Spacing used
+$spacer: 1rem; // 1rem = 16px in most carowsers
+// We need a scale of 8
+// 0, 8, 16, 32, 48, 64, 128
+$spacers: (
+    0: 0,
+    1: (
+        $spacer * 0.5,
+    ),
+    2: $spacer,
+    3: (
+        $spacer * 2,
+    ),
+    4: (
+        $spacer * 3,
+    ),
+    5: (
+        $spacer * 4,
+    ),
+    6: (
+        $spacer * 5,
+    ),
+    7: (
+        $spacer * 6,
+    ),
+);
+
+// Colors
+$primary: #fdc800;
+$secondary: #ffe920;
+
+// System Colors
+$success: #28cf5f;
+$info: #2ac7e9;
+$warning: #eda826;
+$danger: #ff3232;
+
+// Shades
+$lighter: #ffffff;
+$light: #f6f6f6;
+$dark: #273951;
+$darker: #000000;
+
+// $link-color: #EF0C7D;
+$link-color: $primary;
+
+$font-family-sans-serif: 'Raleway', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+
+// Private Parameters ( non third-party )
+$sidebar-width: 250px;
+$topbar-height: 50px;

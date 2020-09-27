@@ -1,0 +1,10 @@
+@import 'ui-framework/ui';
+
+.container {
+    :global {
+        .error-text,
+        .text-small {
+            font-size: 12px;
+        }
+    }
+}
