@@ -11,6 +11,8 @@ import dashRoutes from './dashRoutes'
 
 import './Dashboard.scss'
 
+// TODO: Responsiveness
+
 class Dashboard extends React.Component {
     state = {
         sideBarIsOpen: window.screen.width > 1024 ? true : false,

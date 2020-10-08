@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     pastSessions: [],
     currentSession: {},
     nextSession: {},
+    votingPayments: {},
     isLoading: false,
     hasError: null,
 }
@@ -55,6 +56,32 @@ const updateSessionError = err => ({
     error: err,
 })
 
+const FETCH_VOTING_PAYMENTS = createAction('FETCH_VOTING_PAYMENTS')
+const fetchVotingPayments = (sessionID, tokenID) => dispatch => {
+    return DispatchAPI(
+        dispatch,
+        sessionAPI.fetchVotingPayments(sessionID, tokenID),
+        {
+            success: fetchVotingPaymentsSuccess,
+            failure: fetchVotingPaymentsError,
+        }
+    )
+}
+
+const FETCH_VOTING_PAYMENTS_SUCCESS = createAction(
+    'FETCH_VOTING_PAYMENTS_SUCCESS'
+)
+const fetchVotingPaymentsSuccess = res => ({
+    type: FETCH_VOTING_PAYMENTS_SUCCESS,
+    votingPayments: res.data,
+})
+
+const FETCH_VOTING_PAYMENTS_ERROR = createAction('FETCH_VOTING_PAYMENTS_ERROR')
+const fetchVotingPaymentsError = err => ({
+    type: FETCH_VOTING_PAYMENTS_ERROR,
+    error: err,
+})
+
 const ADD_TOKEN_TO_CURRENT_AND_NEXT_SESSION = createAction(
     'ADD_TOKEN_TO_CURRENT_AND_NEXT_SESSION'
 )
@@ -74,6 +101,7 @@ const updateTokenOfCurrentAndNextSession = token => ({
 export const actions = {
     fetchSessions,
     updateSession,
+    fetchVotingPayments,
     addTokenToCurrentAndNextSession,
     updateTokenOfCurrentAndNextSession,
 }
@@ -82,6 +110,7 @@ export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case FETCH_SESSIONS:
         case UPDATE_SESSION:
+        case FETCH_VOTING_PAYMENTS:
             return { ...state, isLoading: true, hasError: null }
         case FETCH_SESSIONS_SUCCESS:
             return {
@@ -106,6 +135,11 @@ export default function (state = INITIAL_STATE, action) {
                     state.nextSession.id === action.session.id
                         ? action.session
                         : state.nextSession,
+            }
+        case FETCH_VOTING_PAYMENTS_SUCCESS:
+            return {
+                ...state,
+                votingPayments: action.votingPayments,
             }
         case ADD_TOKEN_TO_CURRENT_AND_NEXT_SESSION:
             return {
@@ -137,6 +171,7 @@ export default function (state = INITIAL_STATE, action) {
             }
         case FETCH_SESSIONS_ERROR:
         case UPDATE_SESSION_ERROR:
+        case FETCH_VOTING_PAYMENTS_ERROR:
             return { ...state, isLoading: false, hasError: action.error }
         default:
             return state

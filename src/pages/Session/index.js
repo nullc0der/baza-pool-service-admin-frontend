@@ -7,6 +7,7 @@ import { actions as sessionActions } from 'store/Session'
 
 import TokenDb from 'components/TokenDb'
 import EditSession from 'components/EditSession'
+import VotingPayments from 'components/VotingPayments'
 
 import s from './Session.module.scss'
 
@@ -15,6 +16,7 @@ class Session extends React.Component {
         tokenDbModalIsOpen: false,
         editSessionModalIsOpen: false,
         selectedSession: '',
+        selectedToken: {},
     }
 
     componentDidMount() {
@@ -52,12 +54,19 @@ class Session extends React.Component {
         this.props.updateSession(id, { is_paused: is_paused })
     }
 
+    setSelectedToken = token => {
+        this.setState({
+            selectedToken: token,
+        })
+    }
+
     render() {
         const { className, currentSession, nextSession } = this.props
         const {
             tokenDbModalIsOpen,
             selectedSession,
             editSessionModalIsOpen,
+            selectedToken,
         } = this.state
         const cx = classnames(className, s.container)
         const session =
@@ -99,7 +108,8 @@ class Session extends React.Component {
                             session.tokens.map((x, i) => (
                                 <div
                                     className="token align-items-center d-flex"
-                                    key={i}>
+                                    key={i}
+                                    onClick={() => this.setSelectedToken(x)}>
                                     <img
                                         src={
                                             process.env
@@ -126,6 +136,14 @@ class Session extends React.Component {
                     toggleEditSessionModal={this.toggleEditSessionModal}
                     session={session}
                     currentSession={selectedSession === 'current'}
+                />
+                <VotingPayments
+                    isVotingPaymentsModalOpen={
+                        !isEmpty(session) && !isEmpty(selectedToken)
+                    }
+                    closeVotingPaymentModal={() => this.setSelectedToken({})}
+                    session={session}
+                    token={selectedToken}
                 />
                 <div
                     className="tokendb-button"
