@@ -33,7 +33,7 @@ class VotingPayments extends React.Component {
                     .then(response => {
                         this.setState({
                             votingPayments: response.data.voting_payments,
-                            totalAmount: response.data.total_amount,
+                            totalAmount: response.data.total,
                         })
                     })
             }
@@ -42,9 +42,14 @@ class VotingPayments extends React.Component {
 
     onInputChange = (id, value) => {
         if (id === 'txHashSearch') {
-            const votingPayments = this.props.votingPayments.voting_payments.filter(
-                x => x.tx_hash === value
-            )
+            let votingPayments = []
+            if (value) {
+                votingPayments = this.props.votingPayments.voting_payments.filter(
+                    x => x.tx_hash === value
+                )
+            } else {
+                votingPayments = this.props.votingPayments.voting_payments
+            }
             this.setState(prevState => ({
                 inputState: {
                     ...prevState.inputState,
@@ -103,8 +108,8 @@ class VotingPayments extends React.Component {
                     <div className="voting-payments">
                         {votingPayments.map((x, i) => (
                             <div className="payment" key={i}>
-                                <span>{x.tx_hash}</span>
-                                <span>
+                                <span className="mr-2">{x.tx_hash}</span>
+                                <span className="mr-2">
                                     {moment(x.timestamp).format('DD/MM/YYYY')}
                                 </span>
                                 <span>{x.amount}</span>
