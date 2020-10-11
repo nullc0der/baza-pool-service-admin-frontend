@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
 import isEmpty from 'lodash/isEmpty'
+import includes from 'lodash/includes'
 
 import { actions as sessionActions } from 'store/Session'
 
@@ -61,7 +62,12 @@ class Session extends React.Component {
     }
 
     render() {
-        const { className, currentSession, nextSession } = this.props
+        const {
+            className,
+            currentSession,
+            nextSession,
+            toggleTokenVisibility,
+        } = this.props
         const {
             tokenDbModalIsOpen,
             selectedSession,
@@ -123,6 +129,32 @@ class Session extends React.Component {
                                         alt="token logo"
                                     />
                                     <p className="mb-0">{x.name}</p>
+                                    <div className="flex-1" />
+                                    <i
+                                        className={`fas fa-${
+                                            includes(
+                                                session.hidden_tokens_id,
+                                                x.id.toString()
+                                            )
+                                                ? 'eye'
+                                                : 'eye-slash'
+                                        }`}
+                                        onClick={e => {
+                                            e.stopPropagation()
+                                            toggleTokenVisibility(
+                                                session.id,
+                                                x.id
+                                            )
+                                        }}
+                                        title={
+                                            includes(
+                                                session.hidden_tokens_id,
+                                                x.id.toString()
+                                            )
+                                                ? 'Show token in session'
+                                                : 'Hide token from session'
+                                        }
+                                    />
                                 </div>
                             ))}
                     </div>
@@ -164,6 +196,8 @@ const mapDispatchToProps = dispatch => ({
     fetchSessions: () => dispatch(sessionActions.fetchSessions()),
     updateSession: (id, data) =>
         dispatch(sessionActions.updateSession(id, data)),
+    toggleTokenVisibility: (sessionID, tokenID) =>
+        dispatch(sessionActions.toggleTokenVisibility(sessionID, tokenID)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Session)

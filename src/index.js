@@ -8,11 +8,11 @@ import * as serviceWorker from './serviceWorker'
 import App from 'containers/App'
 
 store.subscribe(() => {
-    const { Auth, ...others } = store.getState()
+    const { Auth, Session, ...others } = store.getState()
     saveLocalState('ui', others)
 })
 
-const render = (Component) => {
+const render = Component => {
     return ReactDOM.render(
         <React.StrictMode>
             <Provider store={store}>

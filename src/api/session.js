@@ -11,3 +11,11 @@ export const updateSession = (id, data) => {
 export const fetchVotingPayments = (sessionID, tokenID) => {
     return jsonAPI(api => api.get(`/votingpayment/${sessionID}/${tokenID}/`))
 }
+
+export const toggleTokenVisibility = (sessionID, tokenID) => {
+    return jsonAPI(api =>
+        api.post(
+            `/votingsession/toggletokenvisibility/${sessionID}/${tokenID}/`
+        )
+    )
+}
