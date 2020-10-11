@@ -74,15 +74,15 @@ class Session extends React.Component {
         return (
             <div className={cx}>
                 <div className="session-details">
-                    <div className="d-flex">
-                        <p className="mr-2">
+                    <div className="d-flex flex-column flex-lg-row align-items-end align-items-lg-center">
+                        <span className="mr-0 mr-lg-2">
                             Start Date:{' '}
                             {new Date(session.start_date).toLocaleDateString()}
-                        </p>
-                        <p>
+                        </span>
+                        <span>
                             End Date:{' '}
                             {new Date(session.end_date).toLocaleDateString()}
-                        </p>
+                        </span>
                         <div className="flex-1" />
                         <div className="edit-button-wrapper">
                             <i
@@ -103,7 +103,7 @@ class Session extends React.Component {
                             </button>
                         </div>
                     </div>
-                    <div className="tokens">
+                    <div className="tokens mt-3">
                         {!isEmpty(session) &&
                             session.tokens.map((x, i) => (
                                 <div
