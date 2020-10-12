@@ -128,7 +128,12 @@ class Session extends React.Component {
                                         }}
                                         alt="token logo"
                                     />
-                                    <p className="mb-0">{x.name}</p>
+                                    <p className="mb-0 mr-2">{x.name}</p>
+                                    <span
+                                        className="mr-2 d-none d-lg-inline"
+                                        title="Total votes">
+                                        {x.total_votes}
+                                    </span>
                                     <div className="flex-1" />
                                     <i
                                         className={`fas fa-${

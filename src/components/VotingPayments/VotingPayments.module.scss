@@ -3,9 +3,10 @@
 .container {
     :global {
         .payment {
+            display: flex;
+            justify-content: space-between;
             border: 1px solid $dark;
             padding: 0.5rem 1rem;
-            margin: 0.5rem 0;
         }
     }
 }

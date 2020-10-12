@@ -4,6 +4,8 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import Modal from 'react-bootstrap/Modal'
 
+import { getReadableCoins } from 'utils/misc'
+
 import TextInput from 'components/TextInput'
 
 import { actions as sessionActions } from 'store/Session'
@@ -16,7 +18,8 @@ class VotingPayments extends React.Component {
             txHashSearch: '',
         },
         votingPayments: [],
-        totalAmount: '',
+        totalAmountRaised: '',
+        totalVotes: 0,
     }
 
     componentDidUpdate = (prevProps, prevState) => {
@@ -33,7 +36,9 @@ class VotingPayments extends React.Component {
                     .then(response => {
                         this.setState({
                             votingPayments: response.data.voting_payments,
-                            totalAmount: response.data.total,
+                            totalAmountRaised:
+                                response.data.total_amount_raised,
+                            totalVotes: response.data.voting_payments.length,
                         })
                     })
             }
@@ -75,7 +80,12 @@ class VotingPayments extends React.Component {
             session,
             token,
         } = this.props
-        const { inputState, votingPayments, totalAmount } = this.state
+        const {
+            inputState,
+            votingPayments,
+            totalAmountRaised,
+            totalVotes,
+        } = this.state
         const cx = classnames(s.container, className)
 
         return (
@@ -102,17 +112,25 @@ class VotingPayments extends React.Component {
                             onChange={this.onInputChange}
                         />
                     </div>
+                    <div className="d-flex justify-content-end">
+                        <p>
+                            Total amount raised:{' '}
+                            {getReadableCoins(totalAmountRaised, 1000000)}
+                        </p>
+                    </div>
                     <div className="d-flex mb-2 justify-content-end">
-                        <p>Total amount raised: {totalAmount}</p>
+                        <p>Total Votes: {totalVotes}</p>
                     </div>
                     <div className="voting-payments">
                         {votingPayments.map((x, i) => (
                             <div className="payment" key={i}>
-                                <span className="mr-2">{x.tx_hash}</span>
-                                <span className="mr-2">
+                                <span title="Tx Hash">{x.tx_hash}</span>
+                                <span title="Time stamp">
                                     {moment(x.timestamp).format('DD/MM/YYYY')}
                                 </span>
-                                <span>{x.amount}</span>
+                                <span title="Amount">
+                                    {getReadableCoins(x.amount, 1000000)}
+                                </span>
                             </div>
                         ))}
                     </div>
