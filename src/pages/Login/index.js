@@ -46,43 +46,41 @@ class LoginPage extends React.Component {
     }
 
     onLoginClick = e => {
-        // TODO: Remove after test
-        throw new Error('Sentry test')
-        // e.preventDefault()
-        // const { authenticateUser } = this.props
-        // const { username, password } = this.state.inputState
-        // const login = Auth.login(username, password)
-        // login
-        //     .then(response => {
-        //         if (response.ok) {
-        //             authenticateUser(
-        //                 response.data.token,
-        //                 response.data.expiry,
-        //                 response.data.username
-        //             )
-        //             localStorage.setItem(
-        //                 'auth',
-        //                 JSON.stringify({ Auth: store.getState().Auth })
-        //             )
-        //             this.setState({
-        //                 loginSuccess: true,
-        //                 errorState: {
-        //                     username: null,
-        //                     password: null,
-        //                     nonField: null,
-        //                 },
-        //             })
-        //         }
-        //     })
-        //     .catch(responseData => {
-        //         this.setState({
-        //             errorState: {
-        //                 username: get(responseData, 'username', null),
-        //                 password: get(responseData, 'password', null),
-        //                 nonField: get(responseData, 'non_field_errors', null),
-        //             },
-        //         })
-        //     })
+        e.preventDefault()
+        const { authenticateUser } = this.props
+        const { username, password } = this.state.inputState
+        const login = Auth.login(username, password)
+        login
+            .then(response => {
+                if (response.ok) {
+                    authenticateUser(
+                        response.data.token,
+                        response.data.expiry,
+                        response.data.username
+                    )
+                    localStorage.setItem(
+                        'auth',
+                        JSON.stringify({ Auth: store.getState().Auth })
+                    )
+                    this.setState({
+                        loginSuccess: true,
+                        errorState: {
+                            username: null,
+                            password: null,
+                            nonField: null,
+                        },
+                    })
+                }
+            })
+            .catch(responseData => {
+                this.setState({
+                    errorState: {
+                        username: get(responseData, 'username', null),
+                        password: get(responseData, 'password', null),
+                        nonField: get(responseData, 'non_field_errors', null),
+                    },
+                })
+            })
     }
 
     render() {
