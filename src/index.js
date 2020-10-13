@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import store, { history, saveLocalState } from './store'
+import * as Sentry from '@sentry/react'
+import { Integrations } from '@sentry/tracing'
 
+import store, { history, saveLocalState } from './store'
 import * as serviceWorker from './serviceWorker'
 import App from 'containers/App'
 
@@ -31,6 +33,17 @@ if (module.hot) {
     module.hot.accept('./containers/App', () => {
         const NextApp = require('./containers/App').default
         render(NextApp)
+    })
+}
+
+if (process.env.NODE_ENV !== 'development') {
+    Sentry.init({
+        dsn: process.env.REACT_APP_SENTRY_DSN,
+        integrations: [new Integrations.BrowserTracing()],
+
+        // We recommend adjusting this value in production, or using tracesSampler
+        // for finer control
+        tracesSampleRate: 1.0,
     })
 }
 
