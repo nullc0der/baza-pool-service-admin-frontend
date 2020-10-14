@@ -4,9 +4,16 @@
     :global {
         .payment {
             display: flex;
-            justify-content: space-between;
             border: 1px solid $dark;
             padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            overflow-x: auto;
+            span {
+                margin-right: 0.5rem;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
         }
     }
 }

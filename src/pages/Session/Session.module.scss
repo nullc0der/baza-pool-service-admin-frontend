@@ -24,11 +24,14 @@
             padding: 1rem;
         }
         .token {
+            display: flex;
+            align-items: center;
             min-height: 60px;
             border: 1px solid $dark;
             padding: 0.5rem 1rem;
             margin: 0.5rem 0;
             cursor: pointer;
+            overflow-x: auto;
         }
         .edit-button-wrapper {
             .fas {

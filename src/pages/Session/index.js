@@ -6,6 +6,8 @@ import includes from 'lodash/includes'
 
 import { actions as sessionActions } from 'store/Session'
 
+import { getReadableCoins } from 'utils/misc'
+
 import TokenDb from 'components/TokenDb'
 import EditSession from 'components/EditSession'
 import VotingPayments from 'components/VotingPayments'
@@ -110,10 +112,18 @@ class Session extends React.Component {
                         </div>
                     </div>
                     <div className="tokens mt-3">
+                        <div className="token">
+                            <span className="mr-2">Logo</span>
+                            <span className="mr-2">Name</span>
+                            <span className="mr-2">Total Votes</span>
+                            <span className="mr-2">Amount Raised</span>
+                            <span className="flex-1" />
+                            <span>Visibility</span>
+                        </div>
                         {!isEmpty(session) &&
                             session.tokens.map((x, i) => (
                                 <div
-                                    className="token align-items-center d-flex"
+                                    className="token"
                                     key={i}
                                     onClick={() => this.setSelectedToken(x)}>
                                     <img
@@ -128,13 +138,21 @@ class Session extends React.Component {
                                         }}
                                         alt="token logo"
                                     />
-                                    <p className="mb-0 mr-2">{x.name}</p>
-                                    <span
-                                        className="mr-2 d-none d-lg-inline"
-                                        title="Total votes">
-                                        {x.total_votes}
+                                    <span className="mr-2">{x.name}</span>
+                                    <span className="mr-2" title="Total votes">
+                                        {x.total_votes || 'N/A'}
                                     </span>
-                                    <div className="flex-1" />
+                                    <span
+                                        className="mr-2"
+                                        title="Amount raised">
+                                        {x.amount_raised
+                                            ? getReadableCoins(
+                                                  x.amount_raised,
+                                                  1000000
+                                              )
+                                            : 'N/A'}
+                                    </span>
+                                    <span className="flex-1" />
                                     <i
                                         className={`fas fa-${
                                             includes(
