@@ -113,11 +113,11 @@ class Session extends React.Component {
                     </div>
                     <div className="tokens mt-3">
                         <div className="token">
-                            <span className="mr-2">Logo</span>
-                            <span className="mr-2">Name</span>
-                            <span className="mr-2">Total Votes</span>
-                            <span className="mr-2">Amount Raised</span>
-                            <span className="flex-1" />
+                            <span>Logo</span>
+                            <span>Name</span>
+                            <span>Total Votes</span>
+                            <span>Amount Raised</span>
+                            <span className="flex-1 d-none d-lg-inline" />
                             <span>Visibility</span>
                         </div>
                         {!isEmpty(session) &&
@@ -126,25 +126,23 @@ class Session extends React.Component {
                                     className="token"
                                     key={i}
                                     onClick={() => this.setSelectedToken(x)}>
-                                    <img
-                                        src={
-                                            process.env
-                                                .REACT_APP_DOCUMENT_ROOT +
-                                            x.logo
-                                        }
-                                        className="img-fluid mr-2"
-                                        style={{
-                                            width: '40px',
-                                        }}
-                                        alt="token logo"
-                                    />
-                                    <span className="mr-2">{x.name}</span>
-                                    <span className="mr-2" title="Total votes">
-                                        {x.total_votes || 'N/A'}
+                                    <span>
+                                        <img
+                                            src={
+                                                process.env
+                                                    .REACT_APP_DOCUMENT_ROOT +
+                                                x.logo
+                                            }
+                                            className="img-fluid"
+                                            style={{
+                                                width: '40px',
+                                            }}
+                                            alt="token logo"
+                                        />
                                     </span>
-                                    <span
-                                        className="mr-2"
-                                        title="Amount raised">
+                                    <span>{x.name}</span>
+                                    <span>{x.total_votes || 'N/A'}</span>
+                                    <span>
                                         {x.amount_raised
                                             ? getReadableCoins(
                                                   x.amount_raised,
@@ -152,32 +150,34 @@ class Session extends React.Component {
                                               )
                                             : 'N/A'}
                                     </span>
-                                    <span className="flex-1" />
-                                    <i
-                                        className={`fas fa-${
-                                            includes(
-                                                session.hidden_tokens_id,
-                                                x.id.toString()
-                                            )
-                                                ? 'eye'
-                                                : 'eye-slash'
-                                        }`}
-                                        onClick={e => {
-                                            e.stopPropagation()
-                                            toggleTokenVisibility(
-                                                session.id,
-                                                x.id
-                                            )
-                                        }}
-                                        title={
-                                            includes(
-                                                session.hidden_tokens_id,
-                                                x.id.toString()
-                                            )
-                                                ? 'Show token in session'
-                                                : 'Hide token from session'
-                                        }
-                                    />
+                                    <span className="flex-1 d-none d-lg-inline" />
+                                    <span>
+                                        <i
+                                            className={`fas fa-${
+                                                includes(
+                                                    session.hidden_tokens_id,
+                                                    x.id.toString()
+                                                )
+                                                    ? 'eye'
+                                                    : 'eye-slash'
+                                            }`}
+                                            onClick={e => {
+                                                e.stopPropagation()
+                                                toggleTokenVisibility(
+                                                    session.id,
+                                                    x.id
+                                                )
+                                            }}
+                                            title={
+                                                includes(
+                                                    session.hidden_tokens_id,
+                                                    x.id.toString()
+                                                )
+                                                    ? 'Show token in session'
+                                                    : 'Hide token from session'
+                                            }
+                                        />
+                                    </span>
                                 </div>
                             ))}
                     </div>
