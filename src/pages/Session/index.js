@@ -118,6 +118,7 @@ class Session extends React.Component {
                             <span>Total Votes</span>
                             <span>Amount Raised</span>
                             <span className="flex-1 d-none d-lg-inline" />
+                            <span>Won Status</span>
                             <span>Visibility</span>
                         </div>
                         {!isEmpty(session) &&
@@ -151,6 +152,9 @@ class Session extends React.Component {
                                             : 'N/A'}
                                     </span>
                                     <span className="flex-1 d-none d-lg-inline" />
+                                    {x.has_won && (
+                                        <span className="fas fa-trophy" />
+                                    )}
                                     <span>
                                         <i
                                             className={`fas fa-${

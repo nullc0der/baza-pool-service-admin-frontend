@@ -25,7 +25,7 @@ const fetchSessions = () => dispatch => {
 const FETCH_SESSIONS_SUCCESS = createAction('FETCH_SESSIONS_SUCCESS')
 const fetchSessionsSuccess = res => ({
     type: FETCH_SESSIONS_SUCCESS,
-    pastSessions: get(res.data, 'past_session', []),
+    pastSessions: get(res.data, 'past_sessions', []),
     currentSession: get(res.data, 'current_session', {}),
     nextSession: get(res.data, 'next_session', {}),
 })
@@ -154,9 +154,10 @@ export default function (state = INITIAL_STATE, action) {
             return {
                 ...state,
                 isLoading: false,
-                pastSessions: state.pastSessions.map(x =>
-                    x.id === action.session.id ? action.session : x
-                ),
+                // NOTE: I think this is not needed, as we can't edit past sessions
+                // pastSessions: state.pastSessions.map(x =>
+                //     x.id === action.session.id ? action.session : x
+                // ),
                 currentSession:
                     state.currentSession.id === action.session.id
                         ? action.session

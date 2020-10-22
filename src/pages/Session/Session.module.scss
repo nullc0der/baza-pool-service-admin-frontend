@@ -23,6 +23,12 @@
         .session-details {
             padding: 1rem;
         }
+        .tokens {
+            visibility: visible;
+            &.hidden {
+                visibility: hidden;
+            }
+        }
         .token {
             display: flex;
             align-items: center;
